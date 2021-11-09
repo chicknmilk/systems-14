@@ -22,7 +22,7 @@ static void sighandler(int sig) {
         write(f_out, exit_msg, strlen(exit_msg));
         exit(0); // this thing stops it from running forever
     }
-    else if (sig == 30) {
+    else if (sig == SIGUSR1) {
         printf("ppid: %d\n", getppid());
     }
 }
@@ -30,7 +30,7 @@ static void sighandler(int sig) {
 
 int main() {
     signal(SIGINT, sighandler);
-    signal(30, sighandler);
+    signal(SIGUSR1, sighandler);
     
     while (1) {
         printf("pid: %d\n", getpid());
